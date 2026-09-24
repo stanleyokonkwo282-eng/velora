@@ -1,0 +1,112 @@
+// Velora — relational integrity for workspaces, vaulted tokens, and the post queue.
+// Production target: PostgreSQL 15 + Prisma.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Workspace {
+  id        String          @id @default(uuid())
+  name      String
+  slug      String          @unique
+  plan      String          @default("studio")
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  members   Membership[]
+  accounts  SocialAccount[]
+  posts     ScheduledPost[]
+  clients   ClientGroup[]
+}
+
+model User {
+  id        String       @id @default(uuid())
+  email     String       @unique
+  name      String
+  createdAt DateTime     @default(now())
+  memberships Membership[]
+}
+
+model Membership {
+  id          String    @id @default(uuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role        Role
+  @@unique([workspaceId, userId])
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  EDITOR
+  APPROVER
+  CLIENT
+  VIEWER
+}
+
+model SocialAccount {
+  id           String          @id @default(uuid())
+  workspaceId  String
+  workspace    Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  platform     String
+  accountName  String
+  handle       String
+  avatarUrl    String?
+  accessToken  String
+  refreshToken String?
+  expiresAt    DateTime?
+  customKeys   Json?
+  usingVeloraKeys Boolean      @default(true)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  posts        ScheduledPost[]
+}
+
+model ScheduledPost {
+  id           String        @id @default(uuid())
+  workspaceId  String
+  workspace    Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  accountId    String
+  account      SocialAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  content      String
+  mediaUrls    String[]
+  firstComment String?
+  scheduledAt  DateTime
+  status       PostStatus    @default(PENDING)
+  errorLog     String?
+  publishedAt  DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+enum PostStatus {
+  PENDING
+  PROCESSING
+  PUBLISHED
+  FAILED
+  DRAFT
+  EVERGREEN
+}
+
+model ClientGroup {
+  id          String    @id @default(uuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  name        String
+  industry    String?
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  workspaceId String
+  actorId   String
+  action    String
+  meta      Json?
+  createdAt DateTime @default(now())
+}

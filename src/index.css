@@ -1,0 +1,911 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   VELORA — PREMIUM BLUE DESIGN SYSTEM
+   Deep-blue canvas, glass surfaces, white ink. Tuned to read beautifully on a
+   phone in Lagos, a laptop in Lisbon and a desktop in Los Angeles.
+   ========================================================================== */
+
+:root {
+  /* Canvas */
+  --v-void: #03071a;
+  --v-abyss: #050d2a;
+  --v-navy: #071238;
+  --v-navy-2: #0a1740;
+  --v-navy-3: #0e1f55;
+  --v-blue-900: #12296b;
+  --v-blue-800: #1b3a9c;
+  --v-blue: #1e40af;
+  --v-blue-bright: #2563eb;
+  --v-blue-light: #3b82f6;
+  --v-azure: #60a5fa;
+  --v-sky: #7dd3fc;
+
+  /* Ink */
+  --v-text: #f6f9ff;
+  --v-text-dim: #c9d7f5;
+  --v-text-mute: #a8bada;
+  --v-text-faint: #8fa3c8;
+
+  /* Glass */
+  --v-glass: rgba(255, 255, 255, 0.055);
+  --v-glass-2: rgba(255, 255, 255, 0.085);
+  --v-glass-3: rgba(255, 255, 255, 0.12);
+  --v-panel: rgba(8, 18, 48, 0.72);
+  --v-panel-solid: rgba(7, 16, 42, 0.94);
+  --v-hairline: rgba(255, 255, 255, 0.11);
+  --v-hairline-2: rgba(255, 255, 255, 0.18);
+
+  /* Accents */
+  --v-good: #6ee7b7;
+  --v-warn: #fcd34d;
+  --v-bad: #fda4af;
+  --v-violet: #c4b5fd;
+
+  --v-radius: 1rem;
+  --v-radius-lg: 1.5rem;
+  --v-shadow-deep: 0 34px 90px -34px rgba(2, 6, 20, 0.95);
+
+  /* Back-compat aliases */
+  --royal: #1e40af;
+  --royal-bright: #2563eb;
+  --navy: #0b1b4a;
+
+  color-scheme: dark;
+}
+
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 450;
+  line-height: 1.65;
+  letter-spacing: -0.004em;
+  color: var(--v-text);
+  background-color: var(--v-abyss);
+  background-image:
+    radial-gradient(1200px 800px at 8% -12%, rgba(37, 99, 235, 0.45), transparent 62%),
+    radial-gradient(900px 700px at 96% 2%, rgba(96, 165, 250, 0.26), transparent 58%),
+    radial-gradient(1000px 900px at 50% 118%, rgba(30, 64, 175, 0.42), transparent 62%),
+    linear-gradient(180deg, var(--v-abyss) 0%, var(--v-navy) 44%, var(--v-navy-2) 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: none;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.14;
+  letter-spacing: -0.022em;
+  font-weight: 700;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+::selection {
+  background: rgba(96, 165, 250, 0.32);
+  color: #ffffff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--v-azure);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 99px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.26);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+* {
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  scrollbar-width: thin;
+}
+
+/* ------------------------------------------------- typographic helpers ---- */
+
+.font-serif {
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-feature-settings: "ss01" on, "ss02" on;
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  font-weight: 500;
+}
+
+.kicker {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--v-azure);
+}
+
+/* Fluid, device-independent headings: premium at every width */
+.display-xl {
+  font-size: clamp(2.35rem, 6.2vw + 0.6rem, 5rem);
+  line-height: 1.03;
+  letter-spacing: -0.034em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+.display-lg {
+  font-size: clamp(1.95rem, 4.2vw + 0.6rem, 3.5rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+.display-md {
+  font-size: clamp(1.5rem, 2.4vw + 0.6rem, 2.3rem);
+  line-height: 1.14;
+  letter-spacing: -0.024em;
+  font-weight: 700;
+}
+.lede {
+  font-size: clamp(1rem, 0.5vw + 0.92rem, 1.1875rem);
+  line-height: 1.65;
+  color: var(--v-text-dim);
+  max-width: 62ch;
+}
+
+.noise {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.035 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ------------------------------------------------------------- surfaces --- */
+
+.aurora {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(760px 520px at 14% -6%, rgba(59, 130, 246, 0.42), transparent 64%),
+    radial-gradient(680px 520px at 88% 6%, rgba(125, 211, 252, 0.22), transparent 60%),
+    radial-gradient(820px 700px at 52% 110%, rgba(30, 64, 175, 0.4), transparent 62%);
+}
+
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 18%, black, transparent 78%);
+  -webkit-mask-image: radial-gradient(circle at 50% 18%, black, transparent 78%);
+}
+
+.mesh {
+  background-image:
+    radial-gradient(1100px 620px at 8% -10%, rgba(37, 99, 235, 0.5), transparent 58%),
+    radial-gradient(860px 520px at 92% 6%, rgba(147, 197, 253, 0.28), transparent 54%),
+    radial-gradient(760px 460px at 50% 104%, rgba(30, 64, 175, 0.42), transparent 56%);
+  background-color: var(--v-navy-2);
+}
+
+.glass {
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.035) 55%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
+  background-color: rgba(10, 23, 64, 0.62);
+  border: 1px solid var(--v-hairline);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+}
+
+.glass-soft {
+  background-color: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.glass-strong {
+  background-color: var(--v-panel-solid);
+  border: 1px solid var(--v-hairline-2);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  box-shadow: var(--v-shadow-deep);
+}
+
+.panel {
+  border-radius: var(--v-radius-lg);
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.03) 60%,
+    rgba(255, 255, 255, 0.012) 100%
+  );
+  background-color: rgba(10, 23, 64, 0.6);
+  border: 1px solid var(--v-hairline);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 22px 50px -30px rgba(2, 6, 20, 0.95);
+}
+
+.hairline {
+  border-color: var(--v-hairline);
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.16) 18%,
+    rgba(255, 255, 255, 0.16) 82%,
+    transparent
+  );
+}
+
+.phone-frame {
+  background: linear-gradient(180deg, #12296b 0%, #050d2a 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.12),
+    0 40px 90px -30px rgba(2, 6, 20, 0.95);
+  border-radius: 2.25rem;
+}
+
+.hide-scroll {
+  scrollbar-width: none;
+}
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.prose-ai p + p {
+  margin-top: 0.6em;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 0px,
+    rgba(255, 255, 255, 0.14) 80px,
+    rgba(255, 255, 255, 0.06) 160px
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+@keyframes caret {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 1.05em;
+  margin-left: 2px;
+  background: #2563eb;
+  animation: caret 1s steps(1) infinite;
+  vertical-align: text-bottom;
+}
+
+/* ------------------------------------------------------------- controls --- */
+
+.field {
+  display: block;
+  width: 100%;
+  min-height: 2.875rem;
+  padding: 0.7rem 0.875rem;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--v-text);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--v-hairline);
+  border-radius: 0.9rem;
+  outline: none;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease, background-color 0.16s ease;
+  appearance: none;
+}
+
+.field::placeholder {
+  color: rgba(201, 215, 245, 0.42);
+}
+
+.field:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.field:focus,
+.field:focus-visible {
+  border-color: rgba(96, 165, 250, 0.75);
+  background-color: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.2);
+}
+
+.field:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+select.field {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23C9D7F5' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  padding-right: 2.2rem;
+}
+
+select.field option,
+select option {
+  background-color: var(--v-navy-2);
+  color: var(--v-text);
+}
+
+textarea.field {
+  min-height: 7rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--v-blue-light);
+}
+
+input[type="range"] {
+  accent-color: var(--v-blue-light);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: var(--v-text);
+  -webkit-box-shadow: 0 0 0 1000px rgba(14, 31, 85, 0.98) inset;
+  caret-color: var(--v-text);
+  transition: background-color 100000s ease-in-out 0s;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background-image: linear-gradient(135deg, #3b82f6 0%, #2563eb 48%, #1d4ed8 100%);
+  border-color: rgba(191, 219, 254, 0.32);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28) inset,
+    0 14px 34px -14px rgba(37, 99, 235, 0.85);
+}
+
+.btn-primary:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.34) inset,
+    0 18px 44px -14px rgba(59, 130, 246, 0.95);
+}
+
+.btn-secondary {
+  color: var(--v-text);
+  background-color: rgba(255, 255, 255, 0.07);
+  border-color: var(--v-hairline);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--v-hairline-2);
+}
+
+.btn-ghost {
+  color: var(--v-text-dim);
+  background-color: transparent;
+}
+
+.btn-ghost:hover {
+  color: var(--v-text);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.btn-danger {
+  color: #fff1f2;
+  background-image: linear-gradient(135deg, #f43f5e, #be123c);
+  border-color: rgba(255, 228, 230, 0.3);
+}
+
+.btn-danger:hover {
+  filter: brightness(1.06);
+}
+
+.btn-gold {
+  color: #2a1a00;
+  background-image: linear-gradient(135deg, #fde68a 0%, #fbbf24 55%, #f59e0b 100%);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 14px 34px -16px rgba(251, 191, 36, 0.9);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 999px;
+  border: 1px solid var(--v-hairline);
+  background-color: rgba(255, 255, 255, 0.06);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--v-text-dim);
+}
+
+.chip-accent {
+  border-color: rgba(147, 197, 253, 0.4);
+  background-color: rgba(59, 130, 246, 0.18);
+  color: #dbeafe;
+}
+
+.trial-bar {
+  height: 6px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.trial-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background-image: linear-gradient(90deg, #7dd3fc, #3b82f6);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.trial-bar.is-warning > span {
+  background-image: linear-gradient(90deg, #fcd34d, #f59e0b);
+}
+
+.trial-bar.is-critical > span {
+  background-image: linear-gradient(90deg, #fda4af, #f43f5e);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+/* ==========================================================================
+   THEME BRIDGE
+   Velora's screens were originally drawn on a white canvas. These rules lift
+   that existing markup onto the premium blue canvas — every screen inherits the
+   new theme without being rewritten. They sit after Tailwind's utilities in the
+   output, so equal-specificity rules win by source order.
+   ========================================================================== */
+
+/* ------------------------------------------------------- panel surfaces --- */
+
+.bg-white {
+  background-color: rgba(13, 28, 72, 0.74);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.bg-white\/85 {
+  background-color: rgba(9, 20, 54, 0.82);
+}
+
+.bg-slate-50,
+.bg-slate-50\/70 {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.bg-slate-100 {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.bg-slate-200 {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.bg-slate-900,
+.bg-ink,
+.bg-\[\#070E24\],
+.bg-\[\#0B1B4A\] {
+  background-color: rgba(5, 12, 34, 0.9);
+}
+
+.bg-slate-900\/40 {
+  background-color: rgba(3, 7, 26, 0.74);
+}
+
+/* Accent surfaces */
+.bg-royal-50,
+.bg-royal-50\/40,
+.bg-royal-50\/50,
+.bg-royal-50\/60,
+.bg-royal-100 {
+  background-color: rgba(96, 165, 250, 0.16);
+}
+
+.bg-royal-600 {
+  background-color: #3b82f6;
+}
+
+.bg-royal-800 {
+  background-color: #2563eb;
+  background-image: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.bg-royal-800:hover,
+.bg-royal-900 {
+  background-color: #1d4ed8;
+}
+
+/* Semantic tones, re-tuned for a dark canvas */
+.bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.16);
+}
+
+.bg-rose-50,
+.bg-rose-100 {
+  background-color: rgba(244, 63, 94, 0.18);
+}
+
+.bg-amber-50 {
+  background-color: rgba(245, 158, 11, 0.18);
+}
+
+.bg-violet-50 {
+  background-color: rgba(139, 92, 246, 0.18);
+}
+
+/* --------------------------------------------------------------- ink ----- */
+
+.text-ink,
+.text-slate-900,
+.text-slate-800 {
+  color: #f2f7ff;
+}
+
+.text-slate-700 {
+  color: #dbe6fb;
+}
+
+.text-slate-600 {
+  color: #c3d3f1;
+}
+
+.text-slate-500 {
+  color: var(--v-text-mute);
+}
+
+.text-slate-400 {
+  color: var(--v-text-faint);
+}
+
+.text-slate-300 {
+  color: #7d90b6;
+}
+
+.text-slate-100 {
+  color: #eaf1ff;
+}
+
+.text-royal-700,
+.text-royal-800,
+.text-royal-900 {
+  color: #93c5fd;
+}
+
+.text-royal-950 {
+  color: #dbeafe;
+}
+
+.text-emerald-600,
+.text-emerald-700,
+.text-emerald-800 {
+  color: var(--v-good);
+}
+
+.text-rose-600,
+.text-rose-800,
+.text-rose-900 {
+  color: var(--v-bad);
+}
+
+.text-amber-600,
+.text-amber-800 {
+  color: var(--v-warn);
+}
+
+.text-violet-800 {
+  color: var(--v-violet);
+}
+
+/* Bright chips keep dark ink so the label stays legible */
+.bg-amber-400.text-ink,
+.bg-amber-300\/80.text-ink,
+.text-amber-400.text-ink {
+  color: #23160a;
+}
+
+/* ---------------------------------------------------------- hairlines ----- */
+
+.border-slate-50,
+.border-slate-100,
+.border-slate-200 {
+  border-color: var(--v-hairline);
+}
+
+.border-slate-300 {
+  border-color: var(--v-hairline-2);
+}
+
+.border-royal-200,
+.border-royal-300 {
+  border-color: rgba(147, 197, 253, 0.42);
+}
+
+.border-royal-600 {
+  border-color: rgba(96, 165, 250, 0.6);
+}
+
+.divide-slate-50 > :not([hidden]) ~ :not([hidden]),
+.divide-slate-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--v-hairline);
+}
+
+/* ------------------------------------------------------------- states ---- */
+
+.hover\:bg-slate-50:hover,
+.hover\:bg-slate-100:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hover\:bg-royal-50\/40:hover {
+  background-color: rgba(96, 165, 250, 0.18);
+}
+
+.hover\:border-slate-300:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.hover\:text-slate-800:hover,
+.hover\:text-slate-700:hover {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   DATA VISUALISATION — recharts, re-tuned for the blue canvas.
+   Charts keep their existing props; their presentation attributes (fill /
+   stroke) are overridden here so nothing renders dark on dark, and the default
+   #666 axis ticks stay readable.
+   ========================================================================== */
+
+.recharts-cartesian-axis-tick text,
+.recharts-text,
+.recharts-legend-item-text {
+  fill: rgba(201, 215, 245, 0.78);
+  font-family: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
+  font-size: 0.6875rem;
+}
+
+.recharts-cartesian-axis-line,
+.recharts-cartesian-axis-tick-line {
+  stroke: rgba(255, 255, 255, 0.14);
+}
+
+.recharts-cartesian-grid line,
+.recharts-grid-line {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.recharts-area-curve {
+  stroke: #93c5fd;
+}
+
+.recharts-layer.recharts-area:nth-of-type(2) .recharts-area-curve {
+  stroke: #5eead4;
+}
+
+.recharts-bar-rectangle path {
+  fill: #4f8cf7;
+}
+
+.recharts-active-dot circle {
+  stroke: #dbeafe;
+}
+
+/* Tooltips ship with inline styles, so they need to win explicitly */
+.recharts-default-tooltip {
+  background-color: rgba(7, 16, 42, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--v-shadow-deep) !important;
+  color: var(--v-text) !important;
+}
+
+.recharts-default-tooltip .recharts-tooltip-label,
+.recharts-default-tooltip .recharts-tooltip-item,
+.recharts-default-tooltip .recharts-tooltip-item-name,
+.recharts-default-tooltip .recharts-tooltip-item-separator,
+.recharts-default-tooltip .recharts-tooltip-item-value {
+  color: var(--v-text) !important;
+}
+
+.recharts-tooltip-cursor {
+  fill: rgba(255, 255, 255, 0.06) !important;
+  stroke: rgba(255, 255, 255, 0.16) !important;
+}
+
+/* ==========================================================================
+   GLOBAL READABILITY
+   Velora is used on phones in bright sun and on 5K studio displays. Micro
+   labels are lifted to a legible floor and body copy gets real leading.
+   ========================================================================== */
+
+.text-\[9px\] {
+  font-size: 0.6563rem;
+  line-height: 0.95rem;
+}
+
+.text-\[10px\] {
+  font-size: 0.6875rem;
+  line-height: 1rem;
+}
+
+.text-\[11px\] {
+  font-size: 0.75rem;
+  line-height: 1.0625rem;
+}
+
+.text-xs {
+  font-size: 0.8125rem;
+  line-height: 1.15rem;
+}
+
+p.text-sm,
+p.text-xs,
+li.text-sm {
+  line-height: 1.65;
+}
+
+kbd {
+  border: 1px solid var(--v-hairline);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  padding: 0.05rem 0.35rem;
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+/* Long words, links and URLs must never blow out a phone viewport */
+.break-anywhere {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ------------------------------------------------------------------ motion */
+
+.caret::after {
+  background: var(--v-sky);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----------------------------------------------------- device refinement -- */
+
+/* Phones: comfortable tap targets and no cramped controls */
+@media (max-width: 640px) {
+  .btn {
+    min-height: 2.75rem;
+  }
+  input,
+  select,
+  textarea,
+  .field {
+    font-size: 16px; /* stops iOS Safari zoom-on-focus */
+  }
+  body {
+    line-height: 1.68;
+  }
+}
+
+/* Notched devices: keep content clear of the home indicator */
+@supports (padding: max(0px)) {
+  .safe-b {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+  .safe-t {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+}
+
+/* Wide screens: keep line length premium */
+@media (min-width: 1600px) {
+  .lede {
+    max-width: 66ch;
+  }
+}
+
+::placeholder {
+  color: rgba(201, 215, 245, 0.42);
+}

@@ -1,0 +1,13 @@
+node_modules
+dist
+.DS_Store
+*.local
+*.tsbuildinfo
+
+# Environment files — never commit live keys or admin emails
+.env
+.env.*
+!.env.example
+
+# Vercel CLI
+.vercel
